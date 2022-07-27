@@ -6,6 +6,7 @@
   "author": "SimonShiki <sinangentoo@gmail.com>",
   "license": "MIT",
   "scripts": {
+      "eat": "node eat.js",
       "generate": "node generate.js",
       "convert": "node convert.js"
   }
