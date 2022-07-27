@@ -56,6 +56,7 @@ try {
         try {
             const filePath = path.join(_dir, fileName);
             if (mapping.hasOwnProperty(fileName)) {
+                console.log('use mapping');
                 const newName = path.join(_dir, `${mapping[fileName]}`);
                 fs.renameSync(filePath, newName);
                 return;
