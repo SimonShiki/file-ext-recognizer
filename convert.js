@@ -41,6 +41,7 @@ try {
 
 const failed = [];
 let count = 0;
+let mapCount = 0;
 
 try {
     console.log('reading directory...');
@@ -57,6 +58,7 @@ try {
             const filePath = path.join(_dir, fileName);
             if (mapping.hasOwnProperty(fileName)) {
                 console.log('use mapping');
+                mapCount++;
                 const newName = path.join(_dir, `${mapping[fileName]}`);
                 fs.renameSync(filePath, newName);
                 return;
@@ -75,7 +77,8 @@ try {
     });
     const failedCount = failed.length;
     console.log(`\n\nSuccess: ${count - failedCount} \nFailed: ${failedCount}\n`);
-    for (const failedName of failed) console.log(failedName);
+    console.log("map used" + mapCount);
+    // for (const failedName of failed) console.log(failedName);
 } catch (e) {
     console.error('error occurred while recognizing', e);
     process.exit();
