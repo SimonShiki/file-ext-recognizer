@@ -1,0 +1,12 @@
+{
+  "name": "file-ext-recognizer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SimonShiki/file-ext-recognizer.git",
+  "author": "SimonShiki <sinangentoo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+      "generate": "node generate.js",
+      "convert": "node convert.js"
+  }
+}

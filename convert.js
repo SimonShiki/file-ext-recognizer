@@ -25,6 +25,20 @@ if (!_dir) {
     process.exit();
 }
 
+let mapping = null;
+
+try {
+    mapping = require('./mapping.json');
+    if (!mapping || mapping == {}) {
+        console.log('failed to load mapping');
+        process.exit();
+    }
+    console.log('mapping loaded');
+} catch (e) {
+    console.log('failed to load mapping', e);
+    process.exit();
+}
+
 const failed = [];
 let count = 0;
 
@@ -41,12 +55,17 @@ try {
         }
         try {
             const filePath = path.join(_dir, fileName);
+            if (fileName in mapping) {
+                const newName = path.join(_dir, `${mapping[fileName]}`);
+                fs.renameSync(filePath, newName);
+                return;
+            }
             const fileBuffer = fs.readFileSync(filePath);
             const ext = readFromBuffer(fileBuffer);
             if (!ext) throw new Error('cannot recognize ' + fileName);
             const newName = path.join(_dir, `${fileName}.${ext}`);
             fs.renameSync(filePath, newName);
-            console.log(`rename ${fileName} successfully`);
+            // console.log(`rename ${fileName} successfully`);
         } catch (e) {
             console.error('failed to rename ' + fileName, e.message);
             failed.push(fileName);
