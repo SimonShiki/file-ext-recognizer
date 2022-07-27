@@ -60,6 +60,7 @@ try {
                 fs.renameSync(filePath, newName);
                 return;
             }
+            console.warn('no mapping found, try guessing...');
             const fileBuffer = fs.readFileSync(filePath);
             const ext = readFromBuffer(fileBuffer);
             if (!ext) throw new Error('cannot recognize ' + fileName);
