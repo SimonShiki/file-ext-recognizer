@@ -48,5 +48,11 @@ function generateMapping (jsonPath) {
                 mapping[costume.assetId] = costume.md5ext;
             }
         }
+        const { sounds } = target;
+        for (const sound of sounds) {
+            if (sound.md5ext && sound.assetId) {
+                mapping[sound.assetId] = sound.md5ext;
+            }
+        }
     }
 }
